@@ -1,6 +1,4 @@
-// Models.js - Generated from OpenAPI schemas (JavaScript classes with validation)
 
-// RegisterDto Model
 export class RegisterData {
   constructor(data = {}) {
     this.username = data.username || '';
@@ -53,7 +51,6 @@ export class RegisterData {
   }
 }
 
-// LoginDto Model
 export class LoginData {
   constructor(data = {}) {
     this.username = data.username || '';
@@ -89,7 +86,6 @@ export class LoginData {
   }
 }
 
-// CreateProductDto Model
 export class CreateProductData {
   constructor(data = {}) {
     this.productName = data.productName || '';
@@ -174,6 +170,7 @@ export class UpdateProductData extends CreateProductData {
     };
   }
 }
+
 
 export class CreateCartItemData {
   constructor(data = {}) {

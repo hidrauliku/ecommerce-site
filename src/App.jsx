@@ -1,19 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Header from './components/Header.jsx'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-const App = () => {
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+import PageBackground from './components/PageBg';
+
+import Marketplace from './pages/Marketplace';
+import MyCart from './pages/MyCart';
+import MyProducts from './pages/My-products';
+import MyOrders from './pages/place-order';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+
+function App() {
   return (
     <Router>
-      <Header></Header>
-      <Routes>
-      
-      </Routes>
-    </Router>
+      <div className="app-container">
+        <Header />
+        
+        <PageBackground>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Marketplace />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
+            {/* Protected Routes */}
+            <Route path="/cart" element={<MyCart />} />
+            <Route path="/my-products" element={<MyProducts />} />
+            <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/profile" element={<Profile />} />
+            
+            {/* Add a 404 Catch-all if desired */}
+            <Route path="*" element={<div className="text-center"><h2>404 - Page Not Found</h2></div>} />
+          </Routes>
+        </PageBackground>
+
+        <Footer />
+      </div>
+    </Router>
   );
-};
-export default App
+}
+
+export default App;
