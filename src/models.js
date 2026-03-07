@@ -153,7 +153,6 @@ export class CreateProductData {
   }
 }
 
-// UpdateProductDto Model (extends CreateProductData)
 export class UpdateProductData extends CreateProductData {
   constructor(data = {}) {
     super(data);
@@ -176,7 +175,6 @@ export class UpdateProductData extends CreateProductData {
   }
 }
 
-// CreateCartItemDto Model
 export class CreateCartItemData {
   constructor(data = {}) {
     this.productId = data.productId || 0;
@@ -213,7 +211,6 @@ export class CreateCartItemData {
   }
 }
 
-// ProductListFilters Model
 export class ProductListFiltersData {
   constructor(data = {}) {
     this.searchTerm = data.searchTerm || '';
