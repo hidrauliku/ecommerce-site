@@ -24,7 +24,7 @@ function App() {
         
         <PageBackground>
           <Routes>
-            {/* Public Routes */}
+          
             <Route path="/" element={<Marketplace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -35,7 +35,7 @@ function App() {
             <Route path="/my-orders" element={<MyOrders />} />
             <Route path="/profile" element={<Profile />} />
             
-            {/* Add a 404 Catch-all if desired */}
+       
             <Route path="*" element={<div className="text-center"><h2>404 - Page Not Found</h2></div>} />
           </Routes>
         </PageBackground>

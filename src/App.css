@@ -1,4 +1,8 @@
-/* --- Base Layout --- */
+/* Global Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -11,13 +15,17 @@ body, html {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 
 .page-background {
-  flex: 1; 
+  flex: 1;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding: 40px 20px;
+  width: 100%;
+  background-color: inherit; /* Inherit body background */
 }
 
 .page-content {
@@ -65,13 +73,16 @@ body, html {
 }
 
 .footer {
-  background-color: #1a252f; 
+  background-color: #1a252f;
   color: #ecf0f1;
-  margin-top: auto; 
+  margin-top: auto;
+  width: 100%;
 }
 
 .footer-main {
   padding: 40px 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-heading {
@@ -113,4 +124,28 @@ body, html {
   text-align: center;
   font-size: 0.9rem;
   color: #7f8c8d;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page-background {
+    padding: 20px 15px;
+  }
+  
+  .page-content {
+    padding: 20px;
+    margin: 0;
+  }
+
+  .footer-main {
+    padding: 30px 20px 10px;
+  }
+
+  .footer-links li {
+    margin-bottom: 5px;
+  }
+  
+  .footer-bottom {
+    padding: 15px 20px;
+  }
 }

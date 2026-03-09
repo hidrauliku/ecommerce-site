@@ -27,7 +27,11 @@ const Register = () => {
     }
 
     try {
-      await AuthService.register(formData);
+      await AuthService.register({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+      });
       setSuccess(true);
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
@@ -42,7 +46,7 @@ const Register = () => {
           <h2 className="text-center mb-4">Join AL Auctions</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {success && <Alert variant="success">Account created! Redirecting to login...</Alert>}
-          
+
           <Form onSubmit={handleRegister}>
             <Form.Group className="mb-3">
               <Form.Label>Username</Form.Label>
