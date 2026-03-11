@@ -8,7 +8,7 @@ const Marketplace = () => {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    EcommerceService.getAllProducts().then(res => setProducts(res.data));
+    EcommerceService.getAllProducts().then(res => setProducts(res));
   }, []);
 
   const handleQtyChange = (id, val) => {
@@ -17,8 +17,13 @@ const Marketplace = () => {
 
   const addToCart = async (productId) => {
     const qty = quantities[productId] || 1;
+    const productdata=
+    {
+  productId: productId,
+  quantity: qty 
+}
     try {
-      await EcommerceService.addToCart(productId, qty);
+      await EcommerceService.addToCart(productdata);
       setMessage({ type: 'success', text: 'Added to cart!' });
       setTimeout(() => setMessage(null), 3000);
     } catch (err) {
@@ -34,7 +39,7 @@ const Marketplace = () => {
         {products.map(p => (
           <Col md={4} key={p.id} className="mb-4">
             <Card className="h-100 shadow-sm border-0">
-              <Card.Img variant="top" src={p.imageUrl || 'https://via.placeholder.com/150'} />
+              <Card.Img variant="top" src={p.imageUrl || 'https://blocks.astratic.com/img/general-img-landscape.png'} />
               <Card.Body>
                 <Card.Title>{p.productName}</Card.Title>
                 <Card.Text className="text-muted">{p.productDescription}</Card.Text>

@@ -17,9 +17,13 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await AuthService.login(username, password);
+      const loginData={
+        username:username,
+        password:password
+      }
+      await AuthService.login(loginData);
       navigate('/');
-      window.location.reload(); // Refresh to update Header state
+      window.location.reload(); 
     } catch (err) {
       setError('Invalid username or password');
       setLoading(false);

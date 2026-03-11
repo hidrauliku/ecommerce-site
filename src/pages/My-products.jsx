@@ -6,7 +6,7 @@ const MyProducts = () => {
   const [myProducts, setMyProducts] = useState([]);
 
   useEffect(() => {
-    EcommerceService.getMyProducts().then(res => setMyProducts(res.data));
+    EcommerceService.getMyProducts().then(res => setMyProducts(res));
   }, []);
 
   return (

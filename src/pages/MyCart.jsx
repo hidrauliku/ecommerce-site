@@ -4,18 +4,19 @@ import { useNavigate, Link } from 'react-router-dom';
 import EcmmerceService from '../services/EcommerceService';
 
 const MyCart = () => {
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
 
-  // Load cart data from API
   const loadCart = async () => {
     try {
       setLoading(true);
       const response = await EcmmerceService.getMyCart();
-      setCart(response.data);
-    } catch (error) {
+    
+      setCart(response.items);    
+    } 
+    catch (error) {
       console.error("Error fetching cart:", error);
       setMessage({ type: 'danger', text: 'Could not load your cart.' });
     } finally {
@@ -25,6 +26,7 @@ const MyCart = () => {
 
   useEffect(() => {
     loadCart();
+    console.log(cart);
   }, []);
 
   // Handle Remove Item
@@ -48,16 +50,17 @@ const MyCart = () => {
       // Redirect to orders page after a short delay
       setTimeout(() => navigate('/my-orders'), 2000);
     } catch (error) {
-      setMessage({ 
-        type: 'danger', 
-        text: 'Checkout failed. Ensure you have enough balance and items are in stock.' 
+      setMessage({
+        type: 'danger',
+        text: 'Checkout failed. Ensure you have enough balance and items are in stock.'
       });
     }
   };
 
   if (loading) return <Container className="mt-5 text-center"><h3>Loading Cart...</h3></Container>;
 
-  if (!cart || !cart.items || cart.items.length === 0) {
+  if (!cart || cart.length === 0) {
+    debugger;
     return (
       <Container className="mt-5 text-center">
         <Card className="p-5 shadow-sm border-0">
@@ -74,7 +77,7 @@ const MyCart = () => {
   return (
     <Container className="mt-4">
       <h2 className="mb-4">Shopping Cart</h2>
-      
+
       {message && <Alert variant={message.type} dismissible onClose={() => setMessage(null)}>{message.text}</Alert>}
 
       <Row>
@@ -92,16 +95,16 @@ const MyCart = () => {
                   </tr>
                 </thead>
                 <tbody style={{ verticalAlign: 'middle' }}>
-                  {cart.items.map((item) => (
+                  {cart.map((item) => (
                     <tr key={item.id}>
                       <td className="px-4 fw-bold">{item.productName}</td>
                       <td>${item.productPrice.toFixed(2)}</td>
                       <td className="text-center">{item.quantity}</td>
                       <td className="fw-bold">${item.totalAmount.toFixed(2)}</td>
                       <td className="text-center">
-                        <Button 
-                          variant="link" 
-                          className="text-danger p-0" 
+                        <Button
+                          variant="link"
+                          className="text-danger p-0"
                           onClick={() => handleRemove(item.id)}
                         >
                           Remove
@@ -121,7 +124,7 @@ const MyCart = () => {
               <h4 className="mb-4">Order Summary</h4>
               <div className="d-flex justify-content-between mb-2">
                 <span>Subtotal</span>
-                <span>${cart.totalAmount.toFixed(2)}</span>
+                <span>${parseFloat(cart.totalAmount).toFixed(2)}</span>
               </div>
               <div className="d-flex justify-content-between mb-4">
                 <span>Shipping</span>
@@ -130,12 +133,12 @@ const MyCart = () => {
               <hr />
               <div className="d-flex justify-content-between mb-4">
                 <span className="h5">Total</span>
-                <span className="h5 text-primary">${cart.totalAmount.toFixed(2)}</span>
+                <span className="h5 text-primary">${parseFloat(cart.totalAmount).toFixed(2)}</span>
               </div>
-              <Button 
-                variant="success" 
-                size="lg" 
-                className="w-100 py-3 fw-bold" 
+              <Button
+                variant="success"
+                size="lg"
+                className="w-100 py-3 fw-bold"
                 onClick={handleCheckout}
               >
                 PLACE ORDER

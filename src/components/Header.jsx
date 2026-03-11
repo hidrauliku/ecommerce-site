@@ -21,7 +21,7 @@ const Header = () => {
 
   const fetchBalance = async () => {
     try {
-      const balance = await EcommerceService.getUserBalance();
+      const balance = await EcommerceService.getBalance();
       setBalance(balance);
     } catch (error) {
       console.error('Error fetching balance:', error);
@@ -62,7 +62,7 @@ const Header = () => {
       </Nav.Link>
       
       <Navbar.Text className="me-3 balance text-light">
-        ${balance !== null ? balance.toFixed(2) : '0.00'}
+        ${balance !== null ? parseFloat( balance).toFixed(2) : '0.00'}
       </Navbar.Text>
       
       <Button variant="outline-light" size="sm" onClick={logOut}>Log Out</Button>
