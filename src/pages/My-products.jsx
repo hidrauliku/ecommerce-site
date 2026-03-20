@@ -13,7 +13,7 @@ const MyProducts = () => {
     <div className="container">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>My Inventory</h2>
-        <Button href="/api/Product/create" variant="primary">Add New Product</Button>
+        <Button href="/create-product" variant="primary">Add New Product</Button>
       </div>
       <Table striped hover className="bg-white shadow-sm rounded">
         <thead>

@@ -49,6 +49,8 @@ const Header = () => {
     <>
       <Nav.Link as={Link} to="/my-products" className="nav-link">My Inventory</Nav.Link>
       <Nav.Link as={Link} to="/my-orders" className="nav-link">Order History</Nav.Link>
+      <Nav.Link as={Link} to="/create-product" className="nav-link">Create Product</Nav.Link>
+
     </>
   )}
 </Nav>
@@ -62,7 +64,7 @@ const Header = () => {
       </Nav.Link>
       
       <Navbar.Text className="me-3 balance text-light">
-        ${balance !== null ? parseFloat( balance).toFixed(2) : '0.00'}
+        ${balance !== null ? parseFloat( balance.balance).toFixed(2) : '0.00'}
       </Navbar.Text>
       
       <Button variant="outline-light" size="sm" onClick={logOut}>Log Out</Button>

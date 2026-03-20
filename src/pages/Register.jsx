@@ -30,7 +30,8 @@ const Register = () => {
       await AuthService.register({
         username: formData.username,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        confirmPassword: formData.confirmPassword
       });
       setSuccess(true);
       setTimeout(() => navigate('/login'), 2000);

@@ -124,6 +124,7 @@ const MyCart = () => {
               <h4 className="mb-4">Order Summary</h4>
               <div className="d-flex justify-content-between mb-2">
                 <span>Subtotal</span>
+                
                 <span>${parseFloat(cart.totalAmount).toFixed(2)}</span>
               </div>
               <div className="d-flex justify-content-between mb-4">
@@ -133,7 +134,8 @@ const MyCart = () => {
               <hr />
               <div className="d-flex justify-content-between mb-4">
                 <span className="h5">Total</span>
-                <span className="h5 text-primary">${parseFloat(cart.totalAmount).toFixed(2)}</span>
+                
+                <span className="h5 text-primary">${ parseFloat(cart.totalAmount).toFixed(2)}</span>
               </div>
               <Button
                 variant="success"

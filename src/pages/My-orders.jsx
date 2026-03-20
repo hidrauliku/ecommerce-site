@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Accordion, Card, Table } from 'react-bootstrap';
-import ProductService from '../services/product.service';
+import ProductService from '../services/EcommerceService';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
