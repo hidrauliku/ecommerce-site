@@ -6,7 +6,7 @@ const MyOrders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    debugger;
+    
     ProductService.getMyOrders().then(res => setOrders(res));
   }, []);
 

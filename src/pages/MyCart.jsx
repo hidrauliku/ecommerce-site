@@ -7,14 +7,18 @@ const MyCart = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
+  const [sum,setSum]=0;
   const navigate = useNavigate();
 
   const loadCart = async () => {
     try {
       setLoading(true);
       const response = await EcmmerceService.getMyCart();
-    
-      setCart(response.items);    
+      setCart(response.items);
+      for(let i=0;i=cart.length;i++){
+        setSum+=cart.totalAmount;
+        debugger;
+      } 
     } 
     catch (error) {
       console.error("Error fetching cart:", error);
@@ -124,8 +128,7 @@ const MyCart = () => {
               <h4 className="mb-4">Order Summary</h4>
               <div className="d-flex justify-content-between mb-2">
                 <span>Subtotal</span>
-                
-                <span>${parseFloat(cart.totalAmount).toFixed(2)}</span>
+                <span>${sum.toFixed(2)}</span>
               </div>
               <div className="d-flex justify-content-between mb-4">
                 <span>Shipping</span>
