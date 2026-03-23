@@ -15,7 +15,6 @@ const MyCart = () => {
       setLoading(true);
       const response = await EcmmerceService.getMyCart();
       setCart(response.items);
-      debugger;
        const totalSum = response.items.reduce((total, item) => {
       return total + (item.totalAmount || item.price * item.quantity || 0);
     }, 0);
@@ -61,7 +60,6 @@ const MyCart = () => {
   if (loading) return <Container className="mt-5 text-center"><h3>Loading Cart...</h3></Container>;
 
   if (!cart || cart.length === 0) {
-    debugger;
     return (
       <Container className="mt-5 text-center">
         <Card className="p-5 shadow-sm border-0">

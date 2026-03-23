@@ -7,7 +7,7 @@ const Marketplace = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState(null);
 
-
+  const[quantities,setQuantities]=useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -55,7 +55,7 @@ const Marketplace = () => {
       productId: productId,
       quantity: qty 
     };
-
+    debugger;
     try {
       await EcommerceService.addToCart(productData);
       setMessage({ type: 'success', text: 'Added to cart!' });
@@ -158,6 +158,7 @@ const Marketplace = () => {
                   >
                     Add to Cart
                   </Button>
+                  
                 </div>
               </Card.Body>
             </Card>
