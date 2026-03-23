@@ -7,7 +7,7 @@ const MyCart = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
-  const [sum,setSum]=0;
+  const [sum,setSum]=useState(0);
   const navigate = useNavigate();
 
   const loadCart = async () => {
@@ -15,10 +15,12 @@ const MyCart = () => {
       setLoading(true);
       const response = await EcmmerceService.getMyCart();
       setCart(response.items);
-      for(let i=0;i=cart.length;i++){
-        setSum+=cart.totalAmount;
-        debugger;
-      } 
+      debugger;
+       const totalSum = response.items.reduce((total, item) => {
+      return total + (item.totalAmount || item.price * item.quantity || 0);
+    }, 0);
+    
+    setSum(totalSum);
     } 
     catch (error) {
       console.error("Error fetching cart:", error);
@@ -33,25 +35,20 @@ const MyCart = () => {
     console.log(cart);
   }, []);
 
-  // Handle Remove Item
   const handleRemove = async (itemId) => {
     try {
       await EcmmerceService.removeFromCart(itemId);
-      // Refresh cart after removal
       loadCart();
     } catch (error) {
       setMessage({ type: 'danger', text: 'Failed to remove item.' });
     }
   };
 
-  // Handle Checkout (Place Order)
   const handleCheckout = async () => {
     try {
       await EcmmerceService.placeOrder();
       setMessage({ type: 'success', text: 'Order placed successfully! Redirecting...' });
-      // Clear local cart view
       setCart(null);
-      // Redirect to orders page after a short delay
       setTimeout(() => navigate('/my-orders'), 2000);
     } catch (error) {
       setMessage({
@@ -104,7 +101,7 @@ const MyCart = () => {
                       <td className="px-4 fw-bold">{item.productName}</td>
                       <td>${item.productPrice.toFixed(2)}</td>
                       <td className="text-center">{item.quantity}</td>
-                      <td className="fw-bold">${item.totalAmount.toFixed(2)}</td>
+                      <td className="fw-bold">${sum.toFixed(2)}</td>
                       <td className="text-center">
                         <Button
                           variant="link"
@@ -130,15 +127,12 @@ const MyCart = () => {
                 <span>Subtotal</span>
                 <span>${sum.toFixed(2)}</span>
               </div>
-              <div className="d-flex justify-content-between mb-4">
-                <span>Shipping</span>
-                <span className="text-success">FREE</span>
-              </div>
+              
               <hr />
               <div className="d-flex justify-content-between mb-4">
                 <span className="h5">Total</span>
                 
-                <span className="h5 text-primary">${ parseFloat(cart.totalAmount).toFixed(2)}</span>
+                <span className="h5 text-primary">${ sum.toFixed(2)}</span>
               </div>
               <Button
                 variant="success"

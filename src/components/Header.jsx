@@ -55,23 +55,24 @@ const Header = () => {
   )}
 </Nav>
 
-<Nav className="nav-right align-items-center">
+<Nav className="nav-right ms-auto">  
   {currentUser ? (
     <>
-      {/* Cart Link */}
-      <Nav.Link as={Link} to="/cart" className="nav-link me-3">
+      <Nav.Link as={Link} to="/cart" className="nav-link cart-link">
         <span>🛒</span> Cart
       </Nav.Link>
       
-      <Navbar.Text className="me-3 balance text-light">
-        ${balance !== null ? parseFloat( balance.balance).toFixed(2) : '0.00'}
+      <Navbar.Text className="balance text-light me-2">
+        ${balance !== null ? parseFloat(balance.balance).toFixed(2) : '0.00'}
       </Navbar.Text>
       
-      <Button variant="outline-light" size="sm" onClick={logOut}>Log Out</Button>
+      <Button variant="outline-light" size="sm" onClick={logOut} className="ms-2">
+        Log Out
+      </Button>
     </>
   ) : (
     <>
-      <Nav.Link as={Link} to="/login" className="nav-link">Login</Nav.Link>
+      <Nav.Link as={Link} to="/login" className="nav-link me-2">Login</Nav.Link>
       <Nav.Link as={Link} to="/register" className="nav-link">Register</Nav.Link>
     </>
   )}
