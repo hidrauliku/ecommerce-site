@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Row, Col, Card, Button, Form, Alert, Pagination,Spinner } from 'react-bootstrap';
 import EcommerceService from '../services/EcommerceService';
+import authService from '../services/auth.service';
 
 const Marketplace = () => {
   const [products, setProducts] = useState([]);
@@ -65,14 +66,13 @@ const Marketplace = () => {
     }
   };
 
-  // Handle Search
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   
     setCurrentPage(1);
   };
 
-  // Handle Page Navigation
   const handlePageClick = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -151,13 +151,14 @@ const Marketplace = () => {
                     style={{ width: '70px' }}
                     className="shadow-none"
                   />
-                  <Button 
-                    variant="primary" 
-                    onClick={() => addToCart(p.id)} 
-                    size="sm"
-                  >
-                    Add to Cart
-                  </Button>
+                 <Button 
+  variant="primary" 
+  onClick={() => addToCart(p.id)} 
+  size="sm"
+  disabled={!authService.isAuthenticated()}
+>
+  Add to Cart
+</Button>
                   
                 </div>
               </Card.Body>

@@ -1,4 +1,3 @@
-// pages/UserProfile.jsx
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Badge, Spinner, Alert, Form, Button } from 'react-bootstrap';
 import EcommerceService from '../services/EcommerceService';
@@ -9,7 +8,6 @@ const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState(null);
 
-  // --- Update balance form state ---
   const [topUpAmount, setTopUpAmount] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -170,5 +168,4 @@ const UserProfile = () => {
     </Container>
   );
 };
-
 export default UserProfile;

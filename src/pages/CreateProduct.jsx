@@ -24,7 +24,6 @@ const CreateProduct = () => {
     e.preventDefault();
     try {
       await EcommerceService.createProduct(formData);
-      // Optionally reset form or redirect
       setFormData({
         productName: '',
         productDescription: '',
@@ -33,6 +32,7 @@ const CreateProduct = () => {
         imageUrl: '',
       });
       alert('Product created successfully!');
+     setTimeout(() => navigate('/my-products'), 2000);
     } catch (err) {
       console.error('Create product error:', err);
       alert('Failed to create product.');
